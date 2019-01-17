@@ -1,5 +1,7 @@
 #include <iostream>
 
+// Полевой ругается минимум на 5 мест здесь
+// Учите его требования, исправляйте, смотрите чужие репы
 
 template <typename T>
 class PriorityQueue {
@@ -23,7 +25,7 @@ public:
             head = tmp->next;
             delete tmp;
         }
-        head = nullptr;
+        head = nullptr;  // test passes with line commented
     }
     /* -- other constructors -- */
 
@@ -108,6 +110,23 @@ int main() {
     pq.insert("eat                ",  3);
     pq.insert("sleep              ",  1);
 
+    auto test_destruction = []() {
+        PQList<string>* outer_pointer;
+        {
+            PQList<string> pq;
+            pq.insert("bass               ", 56);
+            pq.insert("repeat             "    );
+            pq.insert("eat                ",  3);
+            pq.insert("sleep              ",  1);
+            outer_pointer = &pq;
+            cout << pq << endl;
+        }
+        cout << *outer_pointer << endl;
+    };
+    
+    test_destruction();
+    /*
+
     cout << pq << "\n\n";
     cout << pq.empty() << ", should be 0" << endl;
     cout << pq.size()  << ", should be 4" << endl;
@@ -129,4 +148,5 @@ int main() {
     cout << pq.size()  << ", should be 0"              << endl;
     // cout << pq.front() << endl;  // segfault
     pq.pop_front();  // err dump
+    */
 }
